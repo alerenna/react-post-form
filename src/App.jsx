@@ -20,7 +20,30 @@ function App() {
 
     setFormData((formData) => ({
       ...formData, [key]: value
+
     }))
+
+    console.log(e.target);
+
+
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault()
+
+    console.log(formData);
+
+    fetch('https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts', {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      })
 
   }
 
@@ -30,13 +53,13 @@ function App() {
       <div className="container">
 
         {/* FORM */}
-        <form>
+        <form method='POST' onSubmit={handleFormSubmit}>
 
           <div className="my-3">
-            <label for="" class="form-label">Title</label>
+            <label htmlFor="" className="form-label">Title</label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               name="title"
               id="title"
               aria-describedby="titleHelperId"
@@ -48,10 +71,10 @@ function App() {
 
 
           <div className="my-3">
-            <label for="" class="form-label">Author</label>
+            <label htmlFor="" className="form-label">Author</label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               name="author"
               id="author"
               aria-describedby="authorHelperId"
@@ -62,10 +85,10 @@ function App() {
           </div>
 
           <div className="my-3">
-            <label for="" class="form-label">Body</label>
+            <label htmlFor="" className="form-label">Body</label>
             <textarea
               type="text-area"
-              class="form-control"
+              className="form-control"
               name="body"
               id="body"
               aria-describedby="bodyHelperId"
@@ -76,17 +99,23 @@ function App() {
             />
           </div>
 
-          <div class="form-check">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               name="public"
               type="checkbox"
               value="Published"
               id="Published"
             />
-            <label class="form-check-label" htmlFor=""> Published </label>
+            <label className="form-check-label" htmlFor=""> Published </label>
           </div>
 
+          <button
+            type="submit"
+            className="btn btn-primary mt-3"
+          >
+            Submit
+          </button>
 
         </form>
       </div>
