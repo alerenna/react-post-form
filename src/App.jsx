@@ -106,6 +106,8 @@ function App() {
               type="checkbox"
               value="Published"
               id="Published"
+              checked={formData.public}
+              onChange={handleFormData}
             />
             <label className="form-check-label" htmlFor=""> Published </label>
           </div>
